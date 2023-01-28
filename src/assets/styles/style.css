@@ -9,7 +9,7 @@
   --navpage-div-width: 90vw;
   --navpage-div-height: 90vh;
 
-  --border-pattern-radius: 10px;
+  --border-radius-pattern: 10px;
 
   --h1-size: 4rem;
   --h1-font-family: 'Righteous', cursive;
@@ -25,6 +25,11 @@ body {
   align-items: center;
   height: 100vh;
   background-color: #9BA3A3;
+}
+
+h1 {
+  font-family: var(--h1-font-family);
+  font-size: var(--h1-size);
 }
 
 p {
