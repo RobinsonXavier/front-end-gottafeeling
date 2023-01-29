@@ -10,7 +10,7 @@ function Welcome() {
         <h1>Como está se sentindo hoje ?</h1>
         <p>GottaFeeling é um site onde as pessoas podem se expressar e falar o que estão...</p>
       </div>
-      <button type="submit" onClick={() => navigate('/signup')}>Cadastre-se</button>
+      <button type="button" onClick={() => navigate('/signup')}>Cadastre-se</button>
       <OptButton onClick={() => navigate('/signin')}>Já sou cadastrado</OptButton>
     </WelcomePage>
   );
