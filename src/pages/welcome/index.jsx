@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import getWelcomeData from '../../services/welcomeApi';
 
 function Welcome() {
   const navigate = useNavigate();
+  const [welcome, setWelcome] = useState({});
+
+  useEffect(() => {
+    async function getWelcome() {
+      const welcomeData = await getWelcomeData();
+      setWelcome(welcomeData);
+    }
+    getWelcome();
+  }, []);
+
   return (
     <WelcomePage>
       <div>
-        <h1>Como está se sentindo hoje ?</h1>
-        <p>GottaFeeling é um site onde as pessoas podem se expressar e falar o que estão...</p>
+        <h1>{welcome.title}</h1>
+        <p>{welcome.message}</p>
       </div>
       <button type="button" onClick={() => navigate('/signup')}>Cadastre-se</button>
       <OptButton onClick={() => navigate('/signin')}>Já sou cadastrado</OptButton>
