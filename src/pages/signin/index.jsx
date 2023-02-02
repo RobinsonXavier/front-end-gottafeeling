@@ -1,9 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import CheckBox from '../../components/Checkbox';
 
-function Signup() {
+function Signin() {
   const [data, setData] = React.useState({});
   const navigate = useNavigate();
 
@@ -15,27 +14,18 @@ function Signup() {
   }
 
   return (
-    <SignupPage>
+    <SigninPage>
       <form>
-        <input placeholder="Nome" type="text" name="name" onChange={formsHandler} />
         <input placeholder="Email" type="text" name="email" onChange={formsHandler} />
-        <fieldset>
-          <legend>Qual o seu gênero ?</legend>
-          <CheckBox data={data} setData={setData} label="Masculino" />
-          <CheckBox data={data} setData={setData} label="Feminino" />
-          <CheckBox data={data} setData={setData} label="Sem Gênero" />
-          <CheckBox data={data} setData={setData} label="Prefiro não dizer" />
-        </fieldset>
         <input placeholder="Senha" type="text" name="password" onChange={formsHandler} />
-        <input placeholder="Confirme a senha" type="text" name="confirmPassword" onChange={formsHandler} />
-        <button type="submit">Registrar</button>
-        <AuthOptButton onClick={() => navigate('/signin')}>Já sou cadastrado</AuthOptButton>
+        <button type="submit">Entrar</button>
+        <AuthOptButton onClick={() => navigate('/signup')}>Não tenho uma conta</AuthOptButton>
       </form>
-    </SignupPage>
+    </SigninPage>
   );
 }
 
-const SignupPage = styled.div`
+const SigninPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,13 +49,6 @@ const SignupPage = styled.div`
     box-sizing: border-box;
   }
 
-  fieldset {
-    display: flex;
-    margin: 10px;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-
   button {
     width: 250px;
     height: 30px;
@@ -84,4 +67,4 @@ const AuthOptButton = styled.button`
   }
 `;
 
-export default Signup;
+export default Signin;

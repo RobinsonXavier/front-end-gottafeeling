@@ -25,6 +25,7 @@ body {
   align-items: center;
   height: 100vh;
   background-color: #9BA3A3;
+  font-family: var(--p-font-family);
 }
 
 h1 {
@@ -34,5 +35,4 @@ h1 {
 
 p {
   font-size: var(--p-size);
-  font-family: var(--p-font-family);
 }
