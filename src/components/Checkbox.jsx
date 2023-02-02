@@ -12,7 +12,7 @@ function CheckBox({ label, setData, data }) {
   return (
     <CheckBoxStyle>
       <label htmlFor={label}>
-        <input onClick={() => getGender(label)} type="checkbox" name="gender" />
+        <input onClick={() => getGender(label)} type="radio" name="gender" />
         {label}
       </label>
     </CheckBoxStyle>
@@ -32,7 +32,10 @@ CheckBox.defaultProps = {
 };
 
 const CheckBoxStyle = styled.div`
+  display: flex;
+  align-items: center;
   width: 250px;
+  height: 30px;
   input {
     width: 20px !important;
     height: 20px !important;
