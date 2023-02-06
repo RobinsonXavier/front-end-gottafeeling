@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CheckBox from '../../components/Checkbox';
+import {
+  getGenderData,
+  createAccount
+} from '../../services/signupApi';
 
 function Signup() {
   const [data, setData] = React.useState({});
+  const [gender, setGender] = useState([]);
   const navigate = useNavigate();
 
   function formsHandler(ev) {
@@ -14,20 +19,43 @@ function Signup() {
     });
   }
 
+  // eslint-disable-next-line consistent-return
+  async function submitHandler(event) {
+    event.preventDefault();
+
+    if (data.confirmPassword !== data.password) {
+      return alert('As senhas não estão iguais. Tente novamente');
+    }
+
+    const result = await createAccount(data);
+
+    if (result.message) {
+      return alert(`${result.message}`);
+    }
+    navigate('/welcome');
+  }
+
+  useEffect(() => {
+    async function getGender() {
+      const genderData = await getGenderData();
+      setGender(genderData);
+    }
+    getGender();
+  }, []);
+
   return (
     <SignupPage>
-      <form>
-        <input placeholder="Nome" type="text" name="name" onChange={formsHandler} />
-        <input placeholder="Email" type="text" name="email" onChange={formsHandler} />
+      <form onSubmit={submitHandler}>
+        <input placeholder="Nome" type="text" name="username" onChange={formsHandler} required />
+        <input placeholder="Email" type="text" name="email" onChange={formsHandler} required />
         <fieldset>
           <legend>Qual o seu gênero ?</legend>
-          <CheckBox data={data} setData={setData} label="Masculino" />
-          <CheckBox data={data} setData={setData} label="Feminino" />
-          <CheckBox data={data} setData={setData} label="Sem Gênero" />
-          <CheckBox data={data} setData={setData} label="Prefiro não dizer" />
+          {gender.length === 0
+            ? <p>Carregando...</p>
+            : gender.map((element) => <CheckBox key={element.name} data={data} genderId={element.id} setData={setData} label={`${element.name}`} />)}
         </fieldset>
-        <input placeholder="Senha" type="text" name="password" onChange={formsHandler} />
-        <input placeholder="Confirme a senha" type="text" name="confirmPassword" onChange={formsHandler} />
+        <input placeholder="Senha" type="text" name="password" onChange={formsHandler} required />
+        <input placeholder="Confirme a senha" type="text" name="confirmPassword" onChange={formsHandler} required />
         <button type="submit">Registrar</button>
         <AuthOptButton onClick={() => navigate('/signin')}>Já sou cadastrado</AuthOptButton>
       </form>
@@ -63,7 +91,7 @@ const SignupPage = styled.div`
     display: flex;
     margin: 10px;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
   }
 
   button {
@@ -72,6 +100,10 @@ const SignupPage = styled.div`
     border-radius: var(--border-radius-pattern);
     border: none;
     margin-top: 10px;
+  }
+  
+  p {
+    margin: 5px 0;
   }
 `;
 

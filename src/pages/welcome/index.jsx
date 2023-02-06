@@ -19,7 +19,7 @@ function Welcome() {
     <WelcomePage>
       <div>
         <h1>{welcome.title}</h1>
-        <p>{welcome.message}</p>
+        <h3>{welcome.message}</h3>
       </div>
       <button type="button" onClick={() => navigate('/signup')}>Cadastre-se</button>
       <OptButton onClick={() => navigate('/signin')}>Já sou cadastrado</OptButton>
@@ -52,7 +52,7 @@ const WelcomePage = styled.div`
     color: var(--font-color);
   }
 
-  p {
+  h3 {
     margin: 5px;
     color: var(--font-color);
   }

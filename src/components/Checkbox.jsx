@@ -3,16 +3,21 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-function CheckBox({ label, setData, data }) {
+function CheckBox({
+  label,
+  setData,
+  data,
+  genderId
+}) {
   function getGender(param) {
     setData({
-      ...data, gender: param
+      ...data, genderId: param
     });
   }
   return (
     <CheckBoxStyle>
       <label htmlFor={label}>
-        <input onClick={() => getGender(label)} type="radio" name="gender" />
+        <input onClick={() => getGender(genderId)} type="radio" name="gender" required />
         {label}
       </label>
     </CheckBoxStyle>
@@ -22,13 +27,15 @@ function CheckBox({ label, setData, data }) {
 CheckBox.propTypes = {
   label: PropTypes.string,
   setData: PropTypes.any,
-  data: PropTypes.object
+  data: PropTypes.object,
+  genderId: PropTypes.number
 };
 
 CheckBox.defaultProps = {
   label: 'Carregando...',
   setData: true,
-  data: {}
+  data: {},
+  genderId: 0
 };
 
 const CheckBoxStyle = styled.div`
